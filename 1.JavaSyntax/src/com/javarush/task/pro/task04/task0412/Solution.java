@@ -14,8 +14,12 @@ public class Solution {
         int multiple = scanner.nextInt();
 
         int sum = 0;
-        //напишите тут ваш код
-
+        for (int i = start; i < end; i++) {
+            if (i % multiple != 0){
+                continue;
+            }
+            sum = i + sum;
+        }
         System.out.println(sum);
     }
 }
