@@ -9,13 +9,14 @@ import java.util.Scanner;
 public class Solution {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int min = scanner.nextInt();
-        int max = scanner.nextInt();
-        if (min > max){
-            int tmp = max;
-            min = tmp;
-            System.out.println(min);
+        int min = Integer.MAX_VALUE;
+        while (scanner.hasNextInt()) {
+            int number = scanner.nextInt();
+            if (min > number) {
+                min = number;
+            }
         }
+        System.out.println(min);
 
     }
 }
