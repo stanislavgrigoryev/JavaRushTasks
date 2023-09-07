@@ -6,6 +6,7 @@ package com.javarush.task.pro.task12.task1206;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;
+import java.util.stream.IntStream;
 
 public class Solution {
     public static void main(String[] args) {
@@ -41,12 +42,14 @@ public class Solution {
     }
 
     public static int countSpaces(String string) {
-        int count = 0;
+//        char[] chars = string.toCharArray();
+//       return (int)IntStream.range(0, chars.length).filter(i -> Character.isSpaceChar(chars[i])).count();
+       int count = 0;
         for (char c : string.toCharArray()) {
-            if (  Character.isSpaceChar(c)){
+           if (  Character.isSpaceChar(c)){
                 count++;
-            }
-        }
+          }
+     }
         return count;
     }
 }
