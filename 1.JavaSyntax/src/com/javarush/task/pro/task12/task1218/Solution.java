@@ -14,7 +14,7 @@ public class Solution {
         ArrayList<String> stringArrayList = new ArrayList<>();
         Stack<String> stack = new Stack<>();
         Map<String, ArrayList<String>> map = new HashMap<>();
-        var exceptionsList = new ArrayList<Exception>();
-        var filesStack = new Stack<File>();
+        ArrayList<Exception> exceptionsList = new ArrayList<Exception>();
+        //ArrayList<> filesStack = new Stack<File>();
     }
 }
