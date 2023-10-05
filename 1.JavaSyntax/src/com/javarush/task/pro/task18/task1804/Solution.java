@@ -24,7 +24,7 @@ public class Solution {
 
     public static void sortNumbers(ArrayList<Integer> numbers) {
 
-            Collections.sort(numbers, (Integer o1, Integer o2) -> o1 - o2);
+            Collections.sort(numbers, Comparator.comparingInt((Integer o) -> o));
             }
     }
 
