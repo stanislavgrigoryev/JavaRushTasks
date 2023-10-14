@@ -4,8 +4,11 @@ package com.javarush.task.task13.task1310;
 Будущий управленец
 */
 
+
+
 public class Solution {
     public static void main(String[] args) throws Exception {
+
     }
 
     interface Person {
@@ -26,6 +29,7 @@ public class Solution {
 
     class Manager implements Boss{
         public void use(Person person) {
+
             person.startToWork();
         }
 
