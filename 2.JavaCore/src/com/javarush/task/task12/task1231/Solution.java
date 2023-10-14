@@ -15,7 +15,7 @@ public class Solution {
         public void fly();
     }
 
-    public static  class Horse {
+    public static class Horse {
         public void run() {
 
         }
