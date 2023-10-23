@@ -14,7 +14,7 @@ public class Solution {
 
     static {
         File file = new File(Statics.FILE_NAME);
-        String string1 = null;
+//        String string1 = null;
         try (Scanner scanner = new Scanner(file)) {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
