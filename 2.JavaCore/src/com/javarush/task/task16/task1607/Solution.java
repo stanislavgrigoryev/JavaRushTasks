@@ -15,6 +15,7 @@ public class Solution {
         while (calculateHorsesFinished(horses) != horses.size()) {
             System.out.println(count++);
         }
+        System.out.println(horses);
     }
 
     public static int calculateHorsesFinished(List<Horse> horses) throws InterruptedException {
@@ -68,5 +69,12 @@ class Horse extends Thread {
                 isFinished = true;
             }
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Horse{" +
+                "isFinished=" + isFinished +
+                '}';
     }
 }
