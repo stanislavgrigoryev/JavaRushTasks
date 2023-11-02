@@ -25,9 +25,9 @@ public class Solution {
             steps.add("Убийство врагов");
         }
 
-        protected Gamer gamer1 = new Gamer("Ivanov", 3);
+        protected Gamer gamer1 = new Gamer("Ivanov", 1);
         protected Gamer gamer2 = new Gamer("Petrov", 1);
-        protected Gamer gamer3 = new Gamer("Sidorov", 5);
+        protected Gamer gamer3 = new Gamer("Sidorov", 1);
 
         public void run() {
             gamer1.start();
@@ -43,7 +43,7 @@ public class Solution {
     }
 
     public static class Gamer extends Thread {
-        private int rating;
+        private final int rating;
 
         public Gamer(String name, int rating) {
             super(name);
@@ -55,8 +55,8 @@ public class Solution {
             try {
                 List<String> steps = OnlineGame.steps;
                 for (String step : steps) {
-                    Thread.sleep(1000/rating);
                     System.out.println(getName() + ":" + step);
+                    Thread.sleep(1000/rating);
                     if (step.equals(steps.get(steps.size() - 1)) && !OnlineGame.isWinnerFound){
                         System.out.println(getName() + ":победитель!");
                         OnlineGame.isWinnerFound = true;
