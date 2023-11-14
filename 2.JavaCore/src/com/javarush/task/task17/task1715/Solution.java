@@ -25,7 +25,7 @@ public class Solution {
     }
 
     public static class Apteka implements Runnable {
-//        Drug drug = new Drug();
+
         ;
 
         @Override
@@ -41,7 +41,7 @@ public class Solution {
     }
 
     public static class Person implements Runnable {
-//        Drug drug = new Drug();
+
 
         @Override
         public  void run() {
