@@ -56,6 +56,7 @@ public class Solution {
                 person.setSex(null);
                 person.setBirthDate(null);
             }
+
         }
     }
 }
