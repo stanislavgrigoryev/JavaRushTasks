@@ -22,14 +22,14 @@ public class Solution {
 
     public static Set<Type> getTypes(Type type) {
         Set<Type> set = new LinkedHashSet<>();
-        if (type instanceof ParameterizedType ){
-            ParameterizedType parameterizedType = (ParameterizedType) type;
+        if (type instanceof ParameterizedType parameterizedType){
             set.add(parameterizedType.getRawType());
-            Type[] actualTypeArguments = parameterizedType.getActualTypeArguments();
-            for (Type actualTypeArgument : actualTypeArguments) {
-                Set<Type> types = getTypes(actualTypeArgument);
-                set.addAll(types);
-            }
+//            Type[] actualTypeArguments = parameterizedType.getActualTypeArguments();
+//            for (Type actualTypeArgument : actualTypeArguments) {
+//                Set<Type> types = getTypes(actualTypeArgument);
+//                set.addAll(types);
+//            }
+            Arrays.stream(parameterizedType.getActualTypeArguments()).map(Solution::getTypes).forEach(set::addAll);
         } else {
             set.add(type);
         }
