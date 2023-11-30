@@ -13,6 +13,7 @@ public class Generator<T> {
 
     T newInstance() throws Exception {
         Constructor<T> declaredConstructors = (Constructor<T>) aClass.getDeclaredConstructors()[0];
-        return declaredConstructors.newInstance();
+        int parameterCount = declaredConstructors.getParameterCount();
+        return declaredConstructors.newInstance(new Object[parameterCount]);
     }
 }
