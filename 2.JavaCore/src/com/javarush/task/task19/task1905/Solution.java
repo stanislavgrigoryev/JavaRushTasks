@@ -1,11 +1,8 @@
 package com.javarush.task.task19.task1905;
 
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+
 
 /* 
 Закрепляем адаптер
