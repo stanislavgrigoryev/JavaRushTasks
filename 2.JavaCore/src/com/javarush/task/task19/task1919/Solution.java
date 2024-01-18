@@ -4,9 +4,12 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.stream.Collectors;
 
 /* 
 Считаем зарплаты
@@ -14,8 +17,6 @@ import java.util.TreeMap;
 
 public class Solution {
     public static void main(String[] args) throws IOException {
-//        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-//        String file = bufferedReader.readLine();
         Map<String, Double> map = new TreeMap<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(args[0]))) {
             while (reader.ready()) {
@@ -34,5 +35,12 @@ public class Solution {
             }
 
         }
+    }
+
+    public static void main1(String[] args) throws IOException {
+         Files.readAllLines(Path.of(args[0])).stream()
+                .collect(Collectors.toMap(string -> string.split(" ")[0], string -> Double.parseDouble(string.split(" ")[1]), Double::sum, TreeMap::new))
+                .forEach((key, value) -> System.out.println(key + " " + value));
+
     }
 }
