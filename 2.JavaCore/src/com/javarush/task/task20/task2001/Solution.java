@@ -12,18 +12,19 @@ import java.util.List;
 public class Solution {
     public static void main(String[] args) {
         //исправьте outputStream/inputStream в соответствии с путем к вашему реальному файлу
-String fileName = "C:\\Users\\setka\\IdeaProjects\\JavaRushTasks\\2.JavaCore\\src\\com\\javarush\\task\\task20\\task2001\\test";
-        try (OutputStream outputStream = new FileOutputStream(File.createTempFile(fileName, null));
-             InputStream inputStream = new FileInputStream(File.createTempFile(fileName, null))) {
-            Human ivanov = new Human("Ivanov", new Asset("home", 999_999.99), new Asset("car", 2999.99));
-            ivanov.save(outputStream);
-            outputStream.flush();
+        try {
+            File your_file_name = File.createTempFile("your_file_name", null);
+            try (OutputStream outputStream = new FileOutputStream(your_file_name);
+                 InputStream inputStream = new FileInputStream(your_file_name)) {
+                Human ivanov = new Human("Ivanov", new Asset("home", 999_999.99), new Asset("car", 2999.99));
+                ivanov.save(outputStream);
+                outputStream.flush();
 
-            Human somePerson = new Human();
-            somePerson.load(inputStream);
-            System.out.println(ivanov.equals(somePerson));
-            //check here that ivanov equals to somePerson - проверьте тут, что ivanov и somePerson равны
-
+                Human somePerson = new Human();
+                somePerson.load(inputStream);
+                System.out.println(ivanov.equals(somePerson));
+                //check here that ivanov equals to somePerson - проверьте тут, что ivanov и somePerson равны
+            }
         } catch (IOException e) {
             //e.printStackTrace();
             System.out.println("Oops, something wrong with my file");
