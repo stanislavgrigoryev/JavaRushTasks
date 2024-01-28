@@ -13,25 +13,26 @@ public class Solution {
         try {
 
             File yourFile = File.createTempFile("your_file_name", null);
-            try (OutputStream outputStream = new FileOutputStream(yourFile);
-                 InputStream inputStream = new FileInputStream(yourFile)) {
+            OutputStream outputStream = new FileOutputStream(yourFile);
+            InputStream inputStream = new FileInputStream(yourFile);
 
+            ClassWithStatic classWithStatic = new ClassWithStatic();
+            classWithStatic.i = 3;
+            classWithStatic.j = 4;
+            classWithStatic.save(outputStream);
+            outputStream.flush();
 
-                ClassWithStatic classWithStatic = new ClassWithStatic();
-                classWithStatic.i = 3;
-                classWithStatic.j = 4;
-                classWithStatic.save(outputStream);
-                outputStream.flush();
+            ClassWithStatic loadedObject = new ClassWithStatic();
+            loadedObject.staticString = "something";
+            loadedObject.i = 6;
+            loadedObject.j = 7;
 
-                ClassWithStatic loadedObject = new ClassWithStatic();
-                loadedObject.staticString = "something";
-                loadedObject.i = 6;
-                loadedObject.j = 7;
+            loadedObject.load(inputStream);
+            //here check that the classWithStatic object is equal to the loadedObject object - проверьте тут, что classWithStatic и loadedObject равны
 
-                loadedObject.load(inputStream);
-                System.out.println(classWithStatic.equals(loadedObject));
-            }
-
+            outputStream.close();
+            inputStream.close();
+            System.out.println(classWithStatic.equals(loadedObject));
 
         } catch (IOException e) {
             //e.printStackTrace();
