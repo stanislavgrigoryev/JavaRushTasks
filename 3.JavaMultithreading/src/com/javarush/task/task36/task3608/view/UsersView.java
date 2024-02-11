@@ -16,6 +16,7 @@ public class UsersView implements View {
         System.out.println("===================================================");
 
     }
+
     @Override
     public void setController(Controller controller) {
         this.controller = controller;
@@ -24,5 +25,9 @@ public class UsersView implements View {
     public void fireEventShowAllUsers() {
         controller.onShowAllUsers();
 
+    }
+
+    public void fireEventShowDeletedUsers() {
+        controller.onShowAllDeletedUsers();
     }
 }
