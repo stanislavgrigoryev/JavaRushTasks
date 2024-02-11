@@ -11,7 +11,7 @@ public class UsersView implements View {
 
     @Override
     public void refresh(ModelData modelData) {
-        System.out.println("All users");
+        System.out.println("All users:");
         modelData.getUsers().forEach(user -> System.out.println("\t" + user));
         System.out.println("===================================================");
 
