@@ -16,9 +16,9 @@ public class Solution {
     public static String[] getTokens(String query, String delimiter) {
 
         StringTokenizer stringTokenizer = new StringTokenizer(query, delimiter);
-        int count = stringTokenizer.countTokens();
-        String [] strings = new String[count];
-        for (int i = 0; i < count; i++) {
+        stringTokenizer.countTokens();
+        String [] strings = new String[stringTokenizer.countTokens()];
+        for (int i = 0; i < strings.length; i++) {
             strings[i] = stringTokenizer.nextToken();
         }
         return strings;
