@@ -31,14 +31,20 @@ public class Solution {
                 String word2 = list.get(j);
                 if (Pair.isMirrorWordPair(word1, word2)) {
                     Pair pair = new Pair();
-                    pair.setFirst(word1);
-                    pair.setSecond(word2);
+                    pair.first = word1;
+                    pair.second = word2;
                     result.add(pair);
+                    list.remove(word1);
+                    list.remove(word2);
+                    i--;
                     break;
                 }
+
             }
         }
-        System.out.println(result);
+        for (Pair pair : result) {
+            System.out.println(pair.first + " " + pair.second);
+        }
     }
 
 
@@ -68,6 +74,7 @@ public class Solution {
         public static boolean isMirrorWordPair(String word1, String word2) {
             return new StringBuilder(word1).reverse().toString().equals(word2);
         }
+
 
 
         @Override
