@@ -13,9 +13,12 @@ public class Solution {
     private int countItems;
 
     public Iterator getIterator(final String name) {
-        countItems++;
-        System.out.println(name + " item " + countItems);
+
         return new Iterator() {
+            {
+                countItems++;
+                System.out.println(name + " item " + countItems);
+            }
             @Override
             public Iterator next() {
                 return getIterator(name);
