@@ -1,0 +1,1 @@
+SELECT position, group_concat(name) FROM employee GROUP BY position;
