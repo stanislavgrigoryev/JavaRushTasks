@@ -1,0 +1,1 @@
+select customers.email, orders.* from customers RIGHT JOIN orders on customers.customer_id = orders.customer_id;
