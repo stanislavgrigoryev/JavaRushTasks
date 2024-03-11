@@ -1,0 +1,1 @@
+select year_born from authors where year_born <= (select MAX(date_released) from books);
