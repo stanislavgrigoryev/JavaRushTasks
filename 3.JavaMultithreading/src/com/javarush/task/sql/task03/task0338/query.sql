@@ -1,0 +1,1 @@
+select * from authors where full_name not like (select CONCAT(first_name,' ', last_name) from authors where last_name = 'Shakespeare');
