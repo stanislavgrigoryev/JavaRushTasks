@@ -1,2 +1,1 @@
-SELECT * FROM math
-
+select a-b, a + b, from math;
