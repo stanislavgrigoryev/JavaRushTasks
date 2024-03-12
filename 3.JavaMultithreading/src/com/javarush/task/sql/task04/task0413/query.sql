@@ -1,0 +1,1 @@
+select FLOOR(a), FLOOR(b) from math;
