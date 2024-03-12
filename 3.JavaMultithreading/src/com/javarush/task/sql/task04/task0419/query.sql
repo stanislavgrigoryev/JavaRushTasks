@@ -1,1 +1,1 @@
-select YEAR(now()), MONTH(now()), DAY(now()), DAYOFMONTH(now())
+select HOUR(now()), MINUTE(now()), SECOND(now())
