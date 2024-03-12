@@ -1,0 +1,1 @@
+select CEIL(a), CEILING(b) from math;
