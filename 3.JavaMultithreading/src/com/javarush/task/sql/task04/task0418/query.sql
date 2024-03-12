@@ -1,0 +1,1 @@
+select CURDATE(), LOCALTIME(), CURTIME(),NOW()
