@@ -1,0 +1,1 @@
+SELECT SUBSTRING(position,1,8) FROM employee;
