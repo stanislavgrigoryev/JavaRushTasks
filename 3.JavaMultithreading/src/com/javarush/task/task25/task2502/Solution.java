@@ -22,13 +22,12 @@ public class Solution {
 
         public Car() {
             wheels = new ArrayList<>();
-            if (loadWheelNamesFromDB() == null) {
+            if (loadWheelNamesFromDB() == null){
                 throw new NullPointerException();
             }
             if (loadWheelNamesFromDB().length < 4) {
                 throw new RuntimeException();
-            }
-            if (loadWheelNamesFromDB().length > 4) {
+            }if (loadWheelNamesFromDB().length > 4) {
                 throw new RuntimeException();
             }
 
