@@ -61,6 +61,7 @@ public class Solution {
     }
 
     private List<Runnable> getCancelledTasksFromExecutor() {
+
         return Collections.EMPTY_LIST;
     }
 
