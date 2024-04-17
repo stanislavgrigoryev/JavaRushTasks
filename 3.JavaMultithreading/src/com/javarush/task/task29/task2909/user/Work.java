@@ -4,6 +4,7 @@ public class Work {
     private String boss;
 
     public String getBoss() {
+
         return boss;
     }
 
