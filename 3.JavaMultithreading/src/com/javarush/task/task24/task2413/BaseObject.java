@@ -39,7 +39,7 @@ public abstract class BaseObject {
 
     public abstract void move();
 
-    boolean intersects(BaseObject o) {
+    public boolean intersects(BaseObject o) {
         double dx = x - o.x;
         double dy = y - o.y;
         double destination = Math.sqrt(dx * dx + dy * dy);
