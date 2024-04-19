@@ -39,12 +39,23 @@ public class Ball extends BaseObject {
         return direction;
     }
 
+    public void setDirection(double direction) {
+        this.direction = direction;
+        double angle = Math.toRadians(direction);
+        dx = Math.cos(angle) * speed;
+        dy = -Math.sin(angle) * speed;
+    }
+
     public double getDx() {
         return dx;
     }
 
     public double getDy() {
         return dy;
+    }
+
+    public void checkRebound(int minx, int maxx, int miny, int maxy) {
+
     }
 
 }
