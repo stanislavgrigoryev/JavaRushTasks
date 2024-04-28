@@ -48,7 +48,7 @@ public class Solution {
         return new Callable<String>() {
             @Override
             public String call() throws Exception {
-                BigInteger divide = BigInteger.valueOf(i).multiply(BigInteger.valueOf(i).add(BigInteger.ONE)).divide(BigInteger.TWO);
+                BigInteger divide = BigInteger.valueOf(i).multiply(BigInteger.valueOf(i).add(BigInteger.ONE)).divide(BigInteger.valueOf(2));
                 return divide.toString();
             }
         };
