@@ -38,7 +38,24 @@ public class Server {
 
         @Override
         public void run() {
-
+            ConsoleHelper.writeMessage("Установлено новое соединение с удаленным адресом " + socket.getRemoteSocketAddress());
+            String userName = null;
+            try(Connection connection = new Connection(socket)) {
+                userName = serverHandshake(connection);
+                sendBroadcastMessage(new Message(MessageType.USER_ADDED, userName));
+                notifyUsers(connection, userName);
+                serverMainLoop(connection, userName);
+            } catch (IOException e) {
+                ConsoleHelper.writeMessage("Произошла ошибка ввода/вывода: " + e.getMessage());
+            } catch (ClassNotFoundException e) {
+                ConsoleHelper.writeMessage("Произошла ошибка при загрузке класса: " + e.getMessage());
+            } finally {
+                if (userName != null) {
+                    connectionMap.remove(userName);
+                    sendBroadcastMessage(new Message(MessageType.USER_REMOVED, userName));
+                }
+                ConsoleHelper.writeMessage("Соединение с удаленным адресом закрыто " + socket.getRemoteSocketAddress());
+            }
         }
 
         private String serverHandshake(Connection connection) throws IOException, ClassNotFoundException {
@@ -69,6 +86,7 @@ public class Server {
                 connection.send(new Message(MessageType.USER_ADDED, name));
             }
         }
+
         private void serverMainLoop(Connection connection, String userName) throws IOException, ClassNotFoundException {
 
             while (true) {
@@ -77,21 +95,21 @@ public class Server {
                 if (message.getType() == MessageType.TEXT) {
                     sendBroadcastMessage(new Message(MessageType.TEXT, userName + ": " + data));
                 } else {
-                    ConsoleHelper.writeMessage("Получено сообщение от " + socket.getRemoteSocketAddress() + ". Тип сообщения не соответствует протоколу.");
+                    ConsoleHelper.writeMessage("Ошибка принятия сообщения");
                 }
             }
         }
     }
 
-        public static void sendBroadcastMessage(Message message) {
-            Collection<Connection> values = connectionMap.values();
-            for (Connection value : values) {
-                try {
-                    value.send(message);
-                } catch (IOException e) {
-                    ConsoleHelper.writeMessage("Не смогли отправить сообщение");
-                }
+    public static void sendBroadcastMessage(Message message) {
+        Collection<Connection> values = connectionMap.values();
+        for (Connection value : values) {
+            try {
+                value.send(message);
+            } catch (IOException e) {
+                ConsoleHelper.writeMessage("Не смогли отправить сообщение");
             }
+        }
     }
 }
 
