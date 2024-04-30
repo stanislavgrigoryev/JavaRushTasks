@@ -46,21 +46,25 @@ public class Server {
                 connection.send(new Message(MessageType.NAME_REQUEST));
                 Message message = connection.receive();
                 if (message.getType() != MessageType.USER_NAME) {
-                    ConsoleHelper.writeMessage("Получено сообщение от " + socket.getRemoteSocketAddress() + ". Тип сообщения не соответствует протоколу.");
                     continue;
                 }
               String  name = message.getData();
                 if (name.isEmpty()) {
-                    ConsoleHelper.writeMessage("Попытка подключения к серверу с пустым именем от " + socket.getRemoteSocketAddress());
                     continue;
                 }
                 if (connectionMap.containsKey(name)) {
-                    ConsoleHelper.writeMessage("Попытка подключения к серверу с уже используемым именем от " + socket.getRemoteSocketAddress());
                     continue;
                 }
                 connectionMap.put(name, connection);
                 connection.send(new Message(MessageType.NAME_ACCEPTED));
                 return name;
+            }
+        }
+        private void notifyUsers(Connection connection, String userName) throws IOException {
+            for (String name : connectionMap.keySet()) {
+                if (name.equals(userName)){
+                    continue;
+                }connection.send(new Message(MessageType.USER_ADDED, name));
             }
         }
     }
