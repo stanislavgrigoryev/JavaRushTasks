@@ -48,7 +48,7 @@ public class Server {
                 if (message.getType() != MessageType.USER_NAME) {
                     continue;
                 }
-              String  name = message.getData();
+                String name = message.getData();
                 if (name.isEmpty()) {
                     continue;
                 }
@@ -60,24 +60,38 @@ public class Server {
                 return name;
             }
         }
+
         private void notifyUsers(Connection connection, String userName) throws IOException {
             for (String name : connectionMap.keySet()) {
-                if (name.equals(userName)){
-                    continue;
-                }connection.send(new Message(MessageType.USER_ADDED, name));
+                if (name.equals(userName)) {
+                    break;
+                }
+                connection.send(new Message(MessageType.USER_ADDED, name));
+            }
+        }
+        private void serverMainLoop(Connection connection, String userName) throws IOException, ClassNotFoundException {
+
+            while (true) {
+                Message message = connection.receive();
+                String data = message.getData();
+                if (message.getType() == MessageType.TEXT) {
+                    sendBroadcastMessage(new Message(MessageType.TEXT, userName + ": " + data));
+                } else {
+                    ConsoleHelper.writeMessage("Получено сообщение от " + socket.getRemoteSocketAddress() + ". Тип сообщения не соответствует протоколу.");
+                }
             }
         }
     }
 
-    public static void sendBroadcastMessage(Message message) {
-        Collection<Connection> values = connectionMap.values();
-        for (Connection value : values) {
-            try {
-                value.send(message);
-            } catch (IOException e) {
-                ConsoleHelper.writeMessage("Не смогли отправить сообщение");
+        public static void sendBroadcastMessage(Message message) {
+            Collection<Connection> values = connectionMap.values();
+            for (Connection value : values) {
+                try {
+                    value.send(message);
+                } catch (IOException e) {
+                    ConsoleHelper.writeMessage("Не смогли отправить сообщение");
+                }
             }
-        }
     }
 }
 

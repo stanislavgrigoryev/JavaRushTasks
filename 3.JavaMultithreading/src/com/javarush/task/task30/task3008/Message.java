@@ -17,7 +17,6 @@ public class Message implements Serializable {
     }
 
 
-
     public MessageType getType() {
         return type;
     }
