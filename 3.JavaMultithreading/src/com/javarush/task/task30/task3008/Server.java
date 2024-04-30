@@ -40,16 +40,37 @@ public class Server {
         public void run() {
 
         }
+
+        private String serverHandshake(Connection connection) throws IOException, ClassNotFoundException {
+            while (true) {
+                connection.send(new Message(MessageType.NAME_REQUEST));
+                Message message = connection.receive();
+                if (message.getType() != MessageType.USER_NAME) {
+                    continue;
+                }
+              String  name = message.getData();
+                if (name.isEmpty()) {
+                    continue;
+                }
+                if (connectionMap.containsKey(name)) {
+                    continue;
+                }
+                connectionMap.put(name, connection);
+                connection.send(new Message(MessageType.NAME_ACCEPTED));
+                return name;
+            }
+        }
     }
 
     public static void sendBroadcastMessage(Message message) {
-
-        for (Connection value : connectionMap.values()) {
+        Collection<Connection> values = connectionMap.values();
+        for (Connection value : values) {
             try {
                 value.send(message);
             } catch (IOException e) {
-                ConsoleHelper.writeMessage("Не смогли отправить сообщение" + value.getRemoteSocketAddress());
+                ConsoleHelper.writeMessage("Не смогли отправить сообщение");
             }
         }
     }
 }
+
