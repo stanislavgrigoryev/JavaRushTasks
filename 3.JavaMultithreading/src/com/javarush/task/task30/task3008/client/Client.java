@@ -131,8 +131,19 @@ public class Client {
                 }
             } while (message.getType() == MessageType.TEXT || message.getType() == MessageType.USER_ADDED || message.getType() == MessageType.USER_REMOVED);
         }
-    }
 
+        public void run() {
+            Socket socket = null;
+            try {
+                socket = new Socket(getServerAddress(), getServerPort());
+                connection = new Connection(socket);
+                clientHandshake();
+                clientMainLoop();
+            } catch (IOException | ClassNotFoundException e) {
+                notifyConnectionStatusChanged(false);
+            }
+        }
+    }
         public static void main(String[] args) throws IOException, ClassNotFoundException {
             Client client = new Client();
             client.run();
