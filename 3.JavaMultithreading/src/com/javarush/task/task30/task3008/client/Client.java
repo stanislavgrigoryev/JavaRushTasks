@@ -100,11 +100,42 @@ public class Client {
 
         }
 
+        protected void clientHandshake() throws IOException, ClassNotFoundException {
+            Message message = null;
+            do {
+                message = connection.receive();
+                if (message.getType() == MessageType.NAME_REQUEST) {
+                    connection.send(new Message(MessageType.USER_NAME, getUserName()));
+                } else if (message.getType() == MessageType.NAME_ACCEPTED) {
+                    notifyConnectionStatusChanged(true);
+                } else {
+                    throw new IOException("Unexpected MessageType");
+                }
+            } while (message.getType() == MessageType.NAME_REQUEST);
+        }
+
+        protected void clientMainLoop() throws IOException, ClassNotFoundException {
+            Message message = null;
+            String text = null;
+            do {
+                message = connection.receive();
+                text = message.getData();
+                if (message.getType() == MessageType.TEXT) {
+                    processIncomingMessage(text);
+                } else if (message.getType() == MessageType.USER_ADDED) {
+                    informAboutAddingNewUser(text);
+                } else if (message.getType() == MessageType.USER_REMOVED) {
+                    informAboutDeletingNewUser(text);
+                } else {
+                    throw new IOException("Unexpected MessageType");
+                }
+            } while (message.getType() == MessageType.TEXT || message.getType() == MessageType.USER_ADDED || message.getType() == MessageType.USER_REMOVED);
+        }
     }
 
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
-        Client client = new Client();
-        client.run();
+        public static void main(String[] args) throws IOException, ClassNotFoundException {
+            Client client = new Client();
+            client.run();
 
+        }
     }
-}
