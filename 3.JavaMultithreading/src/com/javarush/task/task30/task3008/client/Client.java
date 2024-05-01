@@ -6,7 +6,7 @@ import com.javarush.task.task30.task3008.Message;
 import com.javarush.task.task30.task3008.MessageType;
 
 import java.io.IOException;
-
+import java.net.Socket;
 
 public class Client {
     protected Connection connection;
@@ -52,7 +52,7 @@ public class Client {
         synchronized (this) {
             try {
                 wait();
-                this.notify(); //?
+                this.notify();
                 if (clientConnected) {
                     ConsoleHelper.writeMessage("Соединение установлено. Для выхода наберите команду 'exit'.");
                 } else {
@@ -78,6 +78,27 @@ public class Client {
 
 
     public class SocketThread extends Thread {
+
+
+        protected void processIncomingMessage(String message) {
+            ConsoleHelper.writeMessage(message);
+        }
+
+        protected void informAboutAddingNewUser(String userName) {
+            ConsoleHelper.writeMessage(userName);
+        }
+
+        protected void informAboutDeletingNewUser(String userName) {
+            ConsoleHelper.writeMessage(userName);
+        }
+
+        protected void notifyConnectionStatusChanged(boolean clientConnected) {
+            synchronized (Client.this) {
+                Client.this.clientConnected = clientConnected;
+                Client.this.notify();
+            }
+
+        }
 
     }
 
