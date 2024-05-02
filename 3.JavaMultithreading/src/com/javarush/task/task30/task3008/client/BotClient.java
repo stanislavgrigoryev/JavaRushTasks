@@ -40,14 +40,13 @@ public class BotClient extends Client {
         protected void processIncomingMessage(String message) throws IOException, ClassNotFoundException {
             ConsoleHelper.writeMessage(message);
 
-            // Отделяем отправителя от текста сообщения
             String userNameDelimiter = ": ";
             String[] split = message.split(userNameDelimiter);
             if (split.length != 2) return;
 
             String messageWithoutUserName = split[1];
 
-            // Подготавливаем формат для отправки даты согласно запросу
+
             String format = null;
             switch (messageWithoutUserName) {
                 case "дата":
