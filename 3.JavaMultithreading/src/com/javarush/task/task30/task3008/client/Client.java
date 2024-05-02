@@ -80,7 +80,7 @@ public class Client {
     public class SocketThread extends Thread {
 
 
-        protected void processIncomingMessage(String message) {
+        protected void processIncomingMessage(String message) throws IOException, ClassNotFoundException {
             ConsoleHelper.writeMessage(message);
         }
 
