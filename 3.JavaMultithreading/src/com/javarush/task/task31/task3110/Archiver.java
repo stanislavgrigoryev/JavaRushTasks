@@ -1,5 +1,7 @@
 package com.javarush.task.task31.task3110;
 
+import com.javarush.task.task31.task3110.command.ExitCommand;
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -15,5 +17,8 @@ public class Archiver {
         String line2 = console.readLine();
         System.out.println("Введите полное имя файла для архивации:");
         zipFileManager.createZip(Paths.get(line2));
+
+        ExitCommand exitCommand = new ExitCommand();
+        exitCommand.execute();
     }
 }
