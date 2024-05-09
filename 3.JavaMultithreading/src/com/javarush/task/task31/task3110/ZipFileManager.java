@@ -1,7 +1,7 @@
 package com.javarush.task.task31.task3110;
 
-import java.io.File;
-import java.io.OutputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.zip.ZipEntry;
@@ -15,8 +15,17 @@ public class ZipFileManager {
     }
 
     public void createZip(Path source) throws Exception {
-        OutputStream zipFile1 = Files.newOutputStream(zipFile);
-
-
+        ZipOutputStream zipOutputStream = new ZipOutputStream(Files.newOutputStream(zipFile));
+        Path fileName = source.toAbsolutePath().getFileName();
+        ZipEntry zipEntry = new ZipEntry(String.valueOf(fileName));
+        zipOutputStream.putNextEntry(zipEntry);
+        try(InputStream inputStream = Files.newInputStream(source)){
+            while (inputStream.available() > 0){
+                int read = inputStream.read();
+                zipOutputStream.write(read);
+            }
+        }
+        zipOutputStream.closeEntry();
+        zipOutputStream.close();
     }
 }
