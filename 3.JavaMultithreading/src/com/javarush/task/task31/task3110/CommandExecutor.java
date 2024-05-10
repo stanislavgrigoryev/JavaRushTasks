@@ -20,6 +20,7 @@ public class CommandExecutor {
     private CommandExecutor() {
     }
 
+
     public static void execute(Operation operation) throws Exception {
         allKnownCommandsMap.get(operation).execute();
     }
