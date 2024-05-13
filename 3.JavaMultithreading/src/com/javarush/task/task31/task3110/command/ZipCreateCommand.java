@@ -10,14 +10,17 @@ import java.nio.file.Paths;
 public class ZipCreateCommand extends ZipCommand {
     @Override
     public void execute() throws Exception {
-        ZipFileManager zipFileManager;
         try {
-            ConsoleHelper.writeMessage("Введите полный путь архива:");
             ConsoleHelper.writeMessage("Создание архива.");
-            zipFileManager = getZipFileManager();
-            Path path = Paths.get(ConsoleHelper.readString());
-            zipFileManager.createZip(path);
+
+            ZipFileManager zipFileManager = getZipFileManager();
+
+            ConsoleHelper.writeMessage("Введите полное имя файла или директории для архивации:");
+            Path sourcePath = Paths.get(ConsoleHelper.readString());
+            zipFileManager.createZip(sourcePath);
+
             ConsoleHelper.writeMessage("Архив создан.");
+
         } catch (PathIsNotFoundException e) {
             ConsoleHelper.writeMessage("Вы неверно указали имя файла или директории.");
         }
