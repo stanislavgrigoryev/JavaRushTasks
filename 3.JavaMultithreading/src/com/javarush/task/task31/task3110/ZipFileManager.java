@@ -2,7 +2,8 @@ package com.javarush.task.task31.task3110;
 
 import com.javarush.task.task31.task3110.exception.PathIsNotFoundException;
 
-import java.io.*;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
@@ -10,10 +11,10 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 public class ZipFileManager {
-    private Path zipFile;
+    // Полный путь zip файла
+    private final Path zipFile;
 
     public ZipFileManager(Path zipFile) {
-
         this.zipFile = zipFile;
     }
 
@@ -49,19 +50,23 @@ public class ZipFileManager {
     }
 
     private void addNewZipEntry(ZipOutputStream zipOutputStream, Path filePath, Path fileName) throws Exception {
-        Path resolve = filePath.resolve(fileName);
-        try (InputStream inputStream = Files.newInputStream(resolve)) {
-            ZipEntry zipEntry = new ZipEntry(String.valueOf(fileName));
-            zipOutputStream.putNextEntry(zipEntry);
+        Path fullPath = filePath.resolve(fileName);
+        try (InputStream inputStream = Files.newInputStream(fullPath)) {
+            ZipEntry entry = new ZipEntry(fileName.toString());
+
+            zipOutputStream.putNextEntry(entry);
+
             copyData(inputStream, zipOutputStream);
+
             zipOutputStream.closeEntry();
         }
     }
 
     private void copyData(InputStream in, OutputStream out) throws Exception {
-        while (in.available() > 0) {
-            int read = in.read();
-            out.write(read);
+        byte[] buffer = new byte[8 * 1024];
+        int len;
+        while ((len = in.read(buffer)) > 0) {
+            out.write(buffer, 0, len);
         }
     }
 }
