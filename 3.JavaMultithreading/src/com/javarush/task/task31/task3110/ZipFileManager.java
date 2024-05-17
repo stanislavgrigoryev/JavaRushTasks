@@ -99,4 +99,26 @@ public class ZipFileManager {
             out.write(buffer, 0, len);
         }
     }
+
+    public void extractAll(Path outputFolder) throws Exception {
+        if (!Files.isRegularFile(zipFile)) {
+            throw new WrongZipFileException();
+        }
+        outputFolder = outputFolder.toAbsolutePath();
+        try (ZipInputStream zipIn = new ZipInputStream(Files.newInputStream(zipFile))) {
+            for (ZipEntry ze; (ze = zipIn.getNextEntry()) != null; ) {
+                Path resolvedPath = outputFolder.resolve(ze.getName()).normalize();
+                if (!resolvedPath.startsWith(outputFolder)) {
+                    throw new RuntimeException("Entry with an illegal path: "
+                            + ze.getName());
+                }
+                if (ze.isDirectory()) {
+                    Files.createDirectories(resolvedPath);
+                } else {
+                    Files.createDirectories(resolvedPath.getParent());
+                    Files.copy(zipIn, resolvedPath);
+                }
+            }
+        }
+    }
 }
