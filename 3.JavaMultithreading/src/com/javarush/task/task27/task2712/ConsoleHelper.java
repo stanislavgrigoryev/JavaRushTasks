@@ -22,7 +22,7 @@ public class ConsoleHelper {
     }
 
     public static List<Dish> getAllDishesForOrder() throws IOException {
-        List<Dish> order = new ArrayList<>();
+        List<Dish> dishes = new ArrayList<>();
         writeMessage("Выберите блюдо:");
         writeMessage(Dish.allDishesToString());
 
@@ -34,7 +34,7 @@ public class ConsoleHelper {
             boolean found = false;
             for (Dish dish : Dish.values()) {
                 if (string.equalsIgnoreCase(dish.name())) {
-                    order.add(dish);
+                    dishes.add(dish);
                     found = true;
                     break;
                 }
@@ -42,6 +42,6 @@ public class ConsoleHelper {
                 ConsoleHelper.writeMessage("Такого блюда нет в меню. Пожалуйста, выберите блюдо из списка.");
             }
         }
-        return order;
+        return dishes;
     }
 }
