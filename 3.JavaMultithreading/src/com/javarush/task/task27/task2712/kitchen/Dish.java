@@ -10,12 +10,19 @@ public enum Dish {
     WATER;
 
     public static String allDishesToString() {
+
         Dish[] dishes = Dish.values();
+
         StringJoiner joiner = new StringJoiner(", ", "\"", "\"");
+
         for (Dish dish : dishes) {
             joiner.add(dish.toString());
         }
+
+        // Форматируем строку
         String result = String.format("%s", joiner);
+
+
         return result;
     }
 }
