@@ -2,6 +2,7 @@ package com.javarush.task.task27.task2712;
 
 
 import com.javarush.task.task27.task2712.kitchen.Cook;
+import com.javarush.task.task27.task2712.kitchen.Waiter;
 
 import java.io.IOException;
 
@@ -13,6 +14,9 @@ public class Restaurant {
         }
         Cook cook = new Cook("Amigo");
         tablet.addObserver(cook);
+        Waiter waiter = new Waiter();
+        Cook cook1 = new Cook("Stepan");
+        cook1.addObserver(waiter);
     }
 }
 
