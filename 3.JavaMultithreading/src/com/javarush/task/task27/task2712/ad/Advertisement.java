@@ -1,20 +1,14 @@
 package com.javarush.task.task27.task2712.ad;
 
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
+
 public class Advertisement {
-    //видео
     private Object content;
-
     private String name;
-
-    //начальная сумма, стоимость рекламы в копейках. Используем long, чтобы избежать проблем с округлением
     private long initialAmount;
-
-    //количество оплаченных показов
     private int hits;
-
-    //продолжительность в секундах
     private int duration;
-
     private long amountPerOneDisplaying;
 
     public Advertisement(Object content, String name, long initialAmount, int hits, int duration) {
@@ -48,7 +42,8 @@ public class Advertisement {
     }
 
     public void revalidate() {
-        if (hits == 0) {
+
+        if (hits < 1) {
             throw new UnsupportedOperationException();
         }
         hits--;

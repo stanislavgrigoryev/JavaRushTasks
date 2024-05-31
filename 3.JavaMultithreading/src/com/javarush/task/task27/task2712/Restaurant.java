@@ -17,6 +17,6 @@ public class Restaurant {
         Waiter waiter = new Waiter();
         Cook cook1 = new Cook("Stepan");
         cook1.addObserver(waiter);
-    }
+    }//
 }
 
