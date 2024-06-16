@@ -4,7 +4,6 @@ package com.javarush.task.jdk13.task41.task4117;
 
 public class User {
 
-
     private Mediator mediator;
     private int id;
     private String name;
