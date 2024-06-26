@@ -18,7 +18,7 @@ public class Solution {
 
     public static Long getSalaryFund() {
         try(Session session = MySessionFactory.getSessionFactory().openSession()) {
-            String hql = "SELECT SUM(e.salary) FROM Employee e";
+            String hql = "SELECT SUM() FROM Employee e";
             Query<Long> query = session.createQuery(hql, Long.class);
             return query.getSingleResult();
         }
