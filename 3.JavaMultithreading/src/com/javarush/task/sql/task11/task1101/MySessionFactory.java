@@ -14,10 +14,10 @@ public class MySessionFactory {
         Properties properties = new Properties();
         properties.put(Environment.DRIVER, "com.mysql.cj.jdbc.Driver");
         properties.put(Environment.URL, "jdbc:mysql://localhost:3306/test");
-        properties.put(Environment.DIALECT, "org.hibernate.dialect.MySQLDialect");
-        properties.put(Environment.HBM2DDL_AUTO, "update");
+        properties.put(Environment.DIALECT, "org.hibernate.dialect.MySQL5Dialect");
         properties.put(Environment.USER, "root");
         properties.put(Environment.PASS, "root");
+        properties.put(Environment.HBM2DDL_AUTO, "update");
         sessionFactory = new Configuration()
                 .setProperties(properties)
                 .addAnnotatedClass(Animal.class)
