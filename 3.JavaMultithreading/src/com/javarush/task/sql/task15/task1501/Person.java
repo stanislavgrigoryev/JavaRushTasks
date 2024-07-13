@@ -12,5 +12,4 @@ public class Person {
     private String name;
     @Column(name = "age")
     private Integer age;
-
 }
