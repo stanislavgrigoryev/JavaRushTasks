@@ -28,7 +28,10 @@ public class Solution {
         pets.add(dog);
 
         StringWriter writer = new StringWriter();
-        convertToJSON(writer, pets);
+        for (Pet pet : pets) {
+            convertToJSON(writer, pet);
+        }
+
         System.out.println(writer.toString());
         //[{"name":"Murka","age":5,"weight":3},{"name":"Killer","age":8,"owner":"Bill Jeferson"}]
     }
